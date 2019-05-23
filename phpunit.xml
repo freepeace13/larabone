@@ -9,14 +9,13 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false">
+    <php>
+        <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+        <env name="APP_DEBUG" value="true"/>
+    </php>
     <testsuites>
         <testsuite name="Larabone Test Suite">
-            <directory>tests</directory>
+            <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">src/</directory>
-        </whitelist>
-    </filter>
 </phpunit>

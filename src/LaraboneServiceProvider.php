@@ -9,10 +9,6 @@ class LaraboneServiceProvider extends ServiceProvider
     public function boot()
     {
         self::registerHelpers();
-
-        // $this->publishes([
-        //     __DIR__.'/../config/larabone.php' => config_path('larabone.php'),
-        // ], 'larabone');
     }
 
     private static function registerHelpers()
