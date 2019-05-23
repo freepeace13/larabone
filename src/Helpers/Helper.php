@@ -4,29 +4,37 @@ namespace Freepeace\Larabone\Helpers;
 
 class Helper
 {
-    private $helperNamespaces = [
-        'Freepeace\\Larabone\\Helpers',
-        'App\\Helpers'
-    ];
+    private $namespace = 'Freepeace\\Larabone\\Helpers';
 
     public function call(string $class = null, string $method = null, ...$args)
     {
-        $helper = $this->getHelperClass($class);
+        $instance = $this->getHelperInstance($class);
 
-        if (!method_exists(new $helper(), $method)) {
-            throw new \BadMethodCallException($class.' method '. $method .' not exists.');
+        if (!method_exists($instance, $method)) {
+            throw new \BadMethodCallException("{$class} class method name {$method} not exists.");
         }
 
-        call_user_func_array([new $helper(), $method], $args);
+        return call_user_func_array(array($instance, $method), $args);
     }
 
-    private function getHelperClass($class)
+    public function getHelperClass(string $class)
     {
-        foreach ($this->helperNamespaces as $namespace) {
-            $class = $namespace.'\\'.$class;
+        foreach ($this->getNamespaces as $namespace) {
+            $class = $namespace."\\{$class}";
             if (class_exists($class)) return $class;
         }
 
-        throw new \InvalidArgumentException('Helper class not exists.');
+        throw new \InvalidArgumentException("Helper class name {$class} not exists.");
+    }
+
+    public function getHelperInstance(string $class)
+    {
+        $helper = $this->getHelperClass($class);
+        return new $helper();
+    }
+
+    private function getNamespaces()
+    {
+        return array($this->namespace, config('larabone.helper.namespace'));
     }
 }
