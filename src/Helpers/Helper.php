@@ -19,7 +19,7 @@ class Helper
 
     public function getHelperClass(string $class)
     {
-        foreach ($this->getNamespaces as $namespace) {
+        foreach ($this->getNamespaces() as $namespace) {
             $class = $namespace."\\{$class}";
             if (class_exists($class)) return $class;
         }

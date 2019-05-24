@@ -10,6 +10,6 @@ if (! function_exists('helper')) {
 
         $pieces = explode('::', $address);
 
-        return $instance->call($pieces[0], $pieces[1], $args);
+        return $instance->call($pieces[0], $pieces[1], ...$args);
     }
 }

@@ -1,9 +1,7 @@
 <?php
 namespace Freepeace\Larabone\Test;
 
-use Orchestra\Testbench\TestCase;
 use Symfony\Component\HttpFoundation\Response;
-use Freepeace\Larabone\Testing\ServiceProvider as TestServiceProvider;
 
 class ExceptionResponseTest extends TestCase
 {
@@ -41,12 +39,5 @@ class ExceptionResponseTest extends TestCase
                 'message'   => 'Request is not allowed.',
                 'exception' => 'Freepeace\\Larabone\\Exceptions\\ForbiddenException'
             ]);
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            TestServiceProvider::class
-        ];
     }
 }
