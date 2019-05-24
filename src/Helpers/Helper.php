@@ -20,8 +20,8 @@ class Helper
     public function getHelperClass(string $class)
     {
         foreach ($this->getNamespaces() as $namespace) {
-            $class = $namespace."\\{$class}";
-            if (class_exists($class)) return $class;
+            $classNamespace = $namespace."\\{$class}";
+            if (class_exists($classNamespace)) return $classNamespace;
         }
 
         throw new \InvalidArgumentException("Helper class name {$class} not exists.");
