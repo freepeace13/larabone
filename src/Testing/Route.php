@@ -15,3 +15,7 @@ Route::get('/forbidden-exception-url', function () {
 Route::get('/unauthorized-exception-url', function () {
     throw new UnauthorizedException('Request is not authorized.');
 });
+
+Route::get('/model-not-found-exception-url', function () {
+    //
+});
