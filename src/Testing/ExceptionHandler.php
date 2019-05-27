@@ -17,10 +17,6 @@ class ExceptionHandler extends LaravelExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->ajax()) {
-            return APIException::responder($request, $exception);
-        }
-
-        return parent::render($request, $exception);
+        return APIException::responder($request, $exception);
     }
 }

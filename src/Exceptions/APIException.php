@@ -8,7 +8,7 @@ use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Contacts\FileSystem\FileNotFoundException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class APIException extends HttpException
@@ -24,12 +24,10 @@ class APIException extends HttpException
         if ($exception instanceof ValidationException) {
             $response['errors'] = $exception->errors();
             $statusCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-        } else if ($exception instanceof AuthorizationException) {
-            $statusCode = Response::HTTP_UNAUTHORIZED;
-        } else if ($exception instanceof AuthenticationException) {
-            $statusCode = Response::HTTP_FORBIDDEN;
-        } else if ($exception instanceof FileNotFoundException || $exception instanceof ModelNotFoundException) {
+        } else if ($exception instanceof ModelNotFoundException) {
             $statusCode = Response::HTTP_NOT_FOUND;
+        } else if ($exception instanceof AuthenticationException || $exception instanceof AuthorizationException) {
+            $statusCode = Response::HTTP_UNAUTHORIZED;
         }
 
         if (method_exists($exception, 'getStatusCode')) {
