@@ -3,6 +3,7 @@
 namespace Freepeace\Larabone\Exceptions;
 
 use Exception;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -29,7 +30,7 @@ class APIException extends HttpException
             ];
         }
 
-        if ($statusCode === Response::HTTP_UNPROCESSABLE_ENTITY) {
+        if ($exception instanceof ValidationException) {
             $response['errors'] = $exception->errors();
         }
 
