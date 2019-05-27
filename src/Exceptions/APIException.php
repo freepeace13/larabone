@@ -32,6 +32,7 @@ class APIException extends HttpException
 
         if ($exception instanceof ValidationException) {
             $response['errors'] = $exception->errors();
+            $statusCode = Response::HTTP_UNPROCESSABLE_ENTITY;
         }
 
         return response()->json($response, $statusCode);
