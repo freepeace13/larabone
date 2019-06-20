@@ -19,6 +19,8 @@ class Helper
 
     public function getHelperClass(string $class)
     {
+        $class = ucfirst(strtolower($class));
+
         foreach ($this->getNamespaces() as $namespace) {
             $classNamespace = $namespace."\\{$class}";
             if (class_exists($classNamespace)) return $classNamespace;

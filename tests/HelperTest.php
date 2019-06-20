@@ -13,7 +13,7 @@ class HelperTest extends TestCase
 
     public function test_can_get_random_token()
     {
-        $token = helper('Larabone::randomToken', 100);
+        $token = helper('larabone::randomToken', 100);
         $this->assertEquals(strlen($token), 100);
     }
 }
