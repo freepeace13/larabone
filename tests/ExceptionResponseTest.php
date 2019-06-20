@@ -14,7 +14,7 @@ class ExceptionResponseTest extends TestCase
             ->assertJson([
                 'message'   => 'Entity not exists.',
                 'debug' => [
-                    'exception' => 'Freepeace\\Larabone\\Exceptions\\NotFoundException'
+                    'exception' => 'NotFoundException'
                 ]
             ]);
     }
@@ -28,7 +28,7 @@ class ExceptionResponseTest extends TestCase
             ->assertJson([
                 'message'   => 'Request is not authorized.',
                 'debug' => [
-                    'exception' => 'Freepeace\\Larabone\\Exceptions\\UnauthorizedException'
+                    'exception' => 'UnauthorizedException'
                 ]
             ]);
     }
@@ -42,7 +42,7 @@ class ExceptionResponseTest extends TestCase
             ->assertJson([
                 'message'   => 'Request is not allowed.',
                 'debug' => [
-                    'exception' => 'Freepeace\\Larabone\\Exceptions\\ForbiddenException'
+                    'exception' => 'ForbiddenException'
                 ]
             ]);
     }
@@ -90,6 +90,12 @@ class ExceptionResponseTest extends TestCase
         $response = $this->json('GET', '/model-not-found-exception-url');
 
         $response
-            ->assertStatus(Response::HTTP_NOT_FOUND);
+            ->assertStatus(Response::HTTP_NOT_FOUND)
+            ->assertJson([
+                'message' => 'Entity not found.',
+                'debug' => [
+                    'exception' => 'ModelNotFoundException'
+                ]
+            ]);
     }
 }

@@ -17,4 +17,11 @@ class Larabone
 
         return $token;
     }
+
+    public function getClassName($namespace) {
+        return join('',
+            array_slice(
+                explode('\\', get_class($namespace)), -1)
+        );
+    }
 }

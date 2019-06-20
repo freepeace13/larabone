@@ -39,7 +39,7 @@ class APIException extends HttpException
                 'code' => $exception->getCode(),
                 'line'  => $exception->getLine(),
                 'trace' => $exception->getTrace(),
-                'exception' => get_class($exception)
+                'exception' => helper('Larabone::getClassName', $exception)
             ];
         }
 
